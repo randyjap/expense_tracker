@@ -1,6 +1,5 @@
 import { RECEIVE_EXPENSES,
-         RECEIVE_EXPENSE,
-         REMOVE_EXPENSE } from '../actions/expenses_actions';
+         RECEIVE_EXPENSE } from '../actions/expenses_actions';
 import { merge } from 'lodash';
 
 const expensesReducer = (state = {}, action) => {
@@ -13,10 +12,6 @@ const expensesReducer = (state = {}, action) => {
       return merge({}, state, {
         [action.expense.id]: action.expense
       });
-    case REMOVE_EXPENSE:
-      const nextState = merge({}, state);
-      delete nextState[action.expense.id];
-      return nextState;
     default:
       return state;
   }

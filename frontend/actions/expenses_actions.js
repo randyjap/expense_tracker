@@ -3,7 +3,6 @@ import { receiveErrors, clearErrors } from './error_actions';
 
 export const RECEIVE_EXPENSES = 'RECEIVE_EXPENSES';
 export const RECEIVE_EXPENSE = 'RECEIVE_EXPENSE';
-export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 
 export const receiveExpenses = expenses => ({
   type: RECEIVE_EXPENSES,
@@ -15,11 +14,6 @@ export const receiveExpense = expense => ({
   expense
 });
 
-export const removeExpense = expense => ({
-  type: REMOVE_EXPENSE,
-  expense
-});
-
 export const createExpense = data => dispatch => (
   APIUtil.createExpense(data)
   .then(expense => dispatch(receiveExpense(expense)))
@@ -27,7 +21,7 @@ export const createExpense = data => dispatch => (
 );
 
 export const fetchAllExpenses = () => dispatch => (
-  APIUtil.fetchAll.Expenses()
+  APIUtil.fetchAllExpenses()
     .then(expenses => dispatch(receiveExpenses(expenses)))
     .fail(err => dispatch(receiveErrors(err.responseJSON)))
 );
@@ -46,6 +40,6 @@ export const updateExpense = data => dispatch => (
 
 export const destroyExpense = id => dispatch => (
   APIUtil.destroyExpense(id)
-    .then(expense => dispatch(removeExpense(expense)))
+    .then(() => dispatch(fetchAllExpenses()))
     .fail(err => dispatch(receiveErrors(err.responseJSON)))
 );

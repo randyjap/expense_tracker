@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
 import Expense from './expense';
-import { receiveExpenses } from '../../actions/expenses_actions';
+import { fetchAllExpenses, destroyExpense } from '../../actions/expenses_actions';
 
 const mapStateToProps = state => ({
-  expenses: state.expenses
+  expenses: state.expenses,
+  session: state.session
 });
 
 const mapDispatchToProps = dispatch => ({
-  receiveExpenses: (expenses) => dispatch(receiveExpenses(expenses))
+  fetchAllExpenses: () => dispatch(fetchAllExpenses()),
+  destroyExpense: (id) => dispatch(destroyExpense(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Expense);
