@@ -33,7 +33,7 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = this.state;
     this.props.signup({user})
-      .then(() => this.redirect('theater')
+      .then(() => this.redirect('expenses')
     );
   }
 
@@ -41,7 +41,7 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = this.state;
     this.props.login({user})
-      .then(() => this.redirect('theater')
+      .then(() => this.redirect('expenses')
     );
   }
 
@@ -59,30 +59,18 @@ class SessionForm extends React.Component {
       if (counter === username.length) {
         this.setState({ password });
         clearInterval(animation);
-        this.props.login({user: {username, password} }).then(() => this.redirect('theater'));
+        this.props.login({user: {username, password} }).then(() => this.redirect('expenses'));
       }
     };
     const animation = setInterval(typer, 70);
   }
 
   render(){
-    let style = {
-      backgroundColor: "red",
-      position: "absolute",
-      right: "25px",
-      top: "20px",
-      color: "white"
-    };
 
     return(
       <div className="main-session-splash">
-        <div className="splash-nav">
-          <Link to="/">
-            <img className="logo" src="http://res.cloudinary.com/dkympkwdz/image/upload/v1488680995/gct-logo_blthd0.png"/>
-          </Link>
-        </div>
         <div className="login-form">
-          <h1 className="session-form-header">Sign In</h1>
+          <h1 className="session-form-header">Sign In or Sign Up</h1>
             <TextField style={{width: 360, marginTop: 10}} autoFocus hintText="Enter Username" floatingLabelText="Username" value={this.state.username} onChange={this.updateProperty('username')} required /><br />
             <TextField style={{width: 360, marginBottom: 40}} errorText={this.props.errors.join(" and ")} hintText="Enter Password" floatingLabelText="Password" type="password" value={this.state.password} onChange={this.updateProperty('password')} required /><br />
             <div><RaisedButton label="Login" onClick={this.login} style={{margin: 12, width: 350}} /></div>

@@ -1,7 +1,9 @@
 import React from 'react';
+import NavContainer from './nav/nav_container';
 
-const App = ({ children }) => (
-  <div className="wrapper">
+const App = ({ children, router }) => (
+  <div>
+    <NavContainer router={router} />
     { children }
   </div>
 );

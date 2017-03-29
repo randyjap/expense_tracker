@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import App from './app';
 import SessionFormContainer from './session/session_form_container';
-import GreetingContainer from './greeting/greeting_container';
+import ExpenseContainer from './expenses/expense_container';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // Needed for onTouchTap
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -20,7 +20,7 @@ const Root = ({ store }) => {
   const _redirectIfLoggedIn = (nextState, replace) => {
     const currentUser = store.getState().session.currentUser;
     if (currentUser) {
-      replace('theater');
+      replace('expenses');
     }
   };
 
@@ -29,9 +29,9 @@ const Root = ({ store }) => {
       <MuiThemeProvider>
         <Router history={ hashHistory } >
           <Route path="/" component={ App } >
-            <IndexRoute component={ GreetingContainer } onEnter={ _redirectIfLoggedIn } />
             <Route path="login" component={ SessionFormContainer } onEnter={ _redirectIfLoggedIn } />
             <Route path="signup" component={ SessionFormContainer } onEnter={ _redirectIfLoggedIn } />
+            <Route path="expenses" component={ ExpenseContainer } onEnter={ _ensureLoggedIn } />
           </Route>
         </Router>
       </MuiThemeProvider>
