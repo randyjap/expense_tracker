@@ -21,12 +21,12 @@ class SessionForm extends React.Component {
   }
 
   componentDidMount(){
-    this.props.clearSessionErrors();
+    this.props.clearErrors();
   }
 
   redirect(route){
     this.props.router.replace(route);
-    this.props.clearSessionErrors();
+    this.props.clearErrors();
   }
 
   signup(e){
@@ -50,7 +50,7 @@ class SessionForm extends React.Component {
   }
 
   demoLogin() {
-    const username = "Guest";
+    const username = "user";
     const password = "password";
     let counter = 0;
     const typer = () => {
