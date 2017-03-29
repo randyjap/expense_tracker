@@ -6,7 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(
+user = User.create(
   username: "user",
   password: "password"
 )
+
+100.times do
+  Expense.create(
+    user: user,
+    date: Faker::Time.between(100.days.ago, Date.today, :all),
+    amount: Faker::Number.decimal(2),
+    description: Faker::Food.ingredient
+  )
+end
