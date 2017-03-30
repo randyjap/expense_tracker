@@ -47,6 +47,12 @@ class Expense extends React.Component{
     this.newExpenseItem();
   }
 
+  handleEdit(id) {
+    this.fetchExpense(id);
+    document.getElementById("date").focus();
+    $('html,body').animate({ scrollTop: $("#date").offset().top}, 'slow');
+  }
+
   handleSubmit() {
     if (this.state.id) {
       this.props.updateExpense(this.state);
@@ -95,7 +101,7 @@ class Expense extends React.Component{
           onChange={this.handleChange('description')} />
         <br />
         <input
-          type="submit" value="Submit"
+          type="submit" value={this.state.id ? "Update" : "Create"}
           onClick={this.handleSubmit}/>
       </form>
     );
@@ -116,7 +122,7 @@ class Expense extends React.Component{
             <td>{item.amount}</td>
             <td>{item.description}</td>
             <td><button
-              onClick={() => this.fetchExpense(item.id)}>Edit</button></td>
+              onClick={() => this.handleEdit(item.id)}>Edit</button></td>
             <td><button
               onClick={() => this.deleteItem(item.id)}>
               Delete</button></td>
@@ -148,7 +154,7 @@ class Expense extends React.Component{
       <div>
         <LineChart width={"1200px"} height={"500px"}
           redraw={true} data={data} />
-        <h1>{this.state.id ?
+        <h1 id="date">{this.state.id ?
             "Edit Existing Expense ID: " + this.state.id :
             "Create New Expense"}</h1>
           {this.renderItemForm()}
