@@ -22,6 +22,10 @@ class Expense extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount(){
+    this.props.fetchAllExpenses();
+  }
+
   handleChange(field){
     return e => {
       this.setState({ [field]: e.target.value });
@@ -60,10 +64,6 @@ class Expense extends React.Component{
       this.props.createExpense(this.state);
     }
     this.newExpenseItem();
-  }
-
-  componentDidMount(){
-    this.props.fetchAllExpenses();
   }
 
   redirect(route){

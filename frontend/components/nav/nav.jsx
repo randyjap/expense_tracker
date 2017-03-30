@@ -5,7 +5,6 @@ import { Link } from 'react-router';
 class Nav extends React.Component{
   constructor(props){
     super(props);
-    this.redirect = this.redirect.bind(this);
     this.signout = this.signout.bind(this);
   }
 
@@ -14,35 +13,34 @@ class Nav extends React.Component{
   }
 
   signout(){
-    this.props.logout();
-    this.props.router.replace('/');
-  }
-
-  render_signin(){
-    return (
-      <FlatButton label="Sign In" onClick={() => this.redirect('login')} />
-    );
-  }
-
-  render_signout(){
-    return (
-      <FlatButton label="Sign Out" onClick={this.signout} />
-    );
+    this.props.logout().then(() => this.props.router.replace('/'));
   }
 
   render(){
-    let navButton;
-    if (this.props.currentUser == null) {
-      navButton = this.render_signin();
+    let navButtons;
+    if (this.props.currentUser === null) {
+      navButtons = (
+        <div>
+          <FlatButton label="Sign In" onClick={() => this.redirect('login')} />
+        </div>
+      );
     } else {
-      navButton = this.render_signout();
+      navButtons = (
+        <div>
+          <FlatButton label="Sign Out" onClick={this.signout} />
+          <FlatButton label="All Expenses"
+            onClick={() => this.redirect('expenses')} />
+          <FlatButton label="Weekly Report"
+            onClick={() => this.redirect('weekly_report')} />
+          <FlatButton label="Custom Report"
+            onClick={() => this.redirect('custom_report')} />
+        </div>
+      );
     }
 
     return (
       <div>
-        <div>
-          { navButton }
-        </div>
+        { navButtons }
       </div>
     );
   }
