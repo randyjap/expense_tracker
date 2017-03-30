@@ -114,6 +114,11 @@ class Expense extends React.Component{
     let labels = [];
     if (expenseList) {
       expenseItems = expenseList.map(item => {
+        let disabled = true;
+        if (this.props.session.currentUser &&
+          this.props.session.currentUser.id === item.user_id) {
+          disabled = false;
+        }
         return (
           <tr>
             <td>{item.user_id}</td>
@@ -121,9 +126,9 @@ class Expense extends React.Component{
             <td>{item.date}</td>
             <td>{item.amount}</td>
             <td>{item.description}</td>
-            <td><button
+            <td><button disabled={disabled}
               onClick={() => this.handleEdit(item.id)}>Edit</button></td>
-            <td><button
+            <td><button disabled={disabled}
               onClick={() => this.deleteItem(item.id)}>
               Delete</button></td>
           </tr>
