@@ -49,8 +49,8 @@ class SessionForm extends React.Component {
     return e => this.setState({ [property]: e.target.value });
   }
 
-  demoLogin() {
-    const username = "user";
+  demoLogin(user) {
+    const username = user;
     const password = "password";
     let counter = 0;
     const typer = () => {
@@ -76,7 +76,8 @@ class SessionForm extends React.Component {
             <div><RaisedButton label="Login" onClick={this.login} style={{margin: 12, width: 350}} /></div>
             <div><RaisedButton label="Signup" onClick={this.signup} style={{margin: 12, width: 350}} /></div>
             <Divider />
-            <div><RaisedButton label="Demo" onClick={this.demoLogin} secondary={true} style={{margin: 12, width: 350}} /></div>
+            <div><RaisedButton label="Guest Demo" onClick={() => this.demoLogin("user")} secondary={true} style={{margin: 12, width: 350}} /></div>
+            <div><RaisedButton label="Admin Demo" onClick={() => this.demoLogin("admin")} secondary={true} style={{margin: 12, width: 350}} /></div>
         </div>
       </div>
     );

@@ -55,9 +55,12 @@ class Api::ExpensesController < ApplicationController
 
   def destroy
     @expense = current_user.expenses.find_by_id(params[:id])
-    @expense.destroy
-
-    render json: @expense, status: 200
+    if @expense
+      @expense.destroy
+      render json: @expense, status: 200
+    else
+      render json: ["not authorized"], status: 422
+    end
   end
 
   private

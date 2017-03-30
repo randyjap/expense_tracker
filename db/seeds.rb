@@ -11,9 +11,24 @@ user = User.create(
   password: "password"
 )
 
+admin = User.create(
+  username: "admin",
+  password: "password",
+  admin: true
+)
+
 50.times do
   Expense.create(
     user: user,
+    date: Faker::Time.between(30.days.ago, Date.today, :all),
+    amount: Faker::Number.decimal(2),
+    description: Faker::Food.ingredient
+  )
+end
+
+50.times do
+  Expense.create(
+    user: admin,
     date: Faker::Time.between(30.days.ago, Date.today, :all),
     amount: Faker::Number.decimal(2),
     description: Faker::Food.ingredient
