@@ -22,7 +22,6 @@ class CustomReport extends React.Component {
       this.setState({
         [field]: e.target.value
       });
-      console.log(this.state);
     };
   }
 
