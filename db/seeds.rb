@@ -11,10 +11,10 @@ user = User.create(
   password: "password"
 )
 
-100.times do
+50.times do
   Expense.create(
     user: user,
-    date: Faker::Time.between(100.days.ago, Date.today, :all),
+    date: Faker::Time.between(30.days.ago, Date.today, :all),
     amount: Faker::Number.decimal(2),
     description: Faker::Food.ingredient
   )

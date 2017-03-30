@@ -15,7 +15,7 @@ export const fetchAllExpenses = () => (
 
 export const fetchExpense = id => (
   $.ajax({
-    method: 'POST',
+    method: 'GET',
     url: `/api/expenses/${id}`
   })
 );

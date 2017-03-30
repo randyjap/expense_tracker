@@ -3,9 +3,9 @@ class Api::ExpensesController < ApplicationController
 
   def index
     if current_user.admin
-      @expenses = Expense.all
+      @expenses = Expense.all.includes(:user)
     else
-      @expenses = current_user.expenses
+      @expenses = current_user.expenses.includes(:user)
     end
     render "api/expenses/index.json.jbuilder", status: 200
   end

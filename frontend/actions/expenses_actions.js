@@ -9,15 +9,10 @@ export const receiveExpenses = expenses => ({
   expenses
 });
 
-export const receiveExpense = expense => ({
-  type: RECEIVE_EXPENSE,
-  expense
-});
-
 export const createExpense = data => dispatch => (
   APIUtil.createExpense(data)
-  .then(expense => dispatch(receiveExpense(expense)))
-  .fail(err => dispatch(receiveErrors(err.responseJSON)))
+    .then(() => dispatch(fetchAllExpenses()))
+    .fail(err => dispatch(receiveErrors(err.responseJSON)))
 );
 
 export const fetchAllExpenses = () => dispatch => (
@@ -26,15 +21,9 @@ export const fetchAllExpenses = () => dispatch => (
     .fail(err => dispatch(receiveErrors(err.responseJSON)))
 );
 
-export const fetchExpense = id => dispatch => (
-  APIUtil.fetchExpense(id)
-    .then(expense => dispatch(receiveExpense(expense)))
-    .fail(err => dispatch(receiveErrors(err.responseJSON)))
-);
-
 export const updateExpense = data => dispatch => (
   APIUtil.updateExpense(data)
-    .then(expense => dispatch(receiveExpense(expense)))
+    .then(() => dispatch(fetchAllExpenses()))
     .fail(err => dispatch(receiveErrors(err.responseJSON)))
 );
 
